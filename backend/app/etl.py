@@ -26,9 +26,19 @@ def load(rows):
         VALUES (:id, :user_id, :title, :body, :loaded_at)
         """, rows)
         conn.commit()
+    with get_conn() as conn:
+        conn.execute(
+        "INSERT INTO etl_runs (ran_at, rows_loaded) VALUES (?, ?)",
+        (dt.datetime.utcnow().isoformat(), len(rows)))
+        conn.commit()
 
 def run_etl():
     raw = extract()
     rows = transform(raw)
     load(rows)
     return {"rows_loaded": len(rows)}
+
+def preview(n=3):
+    raw = extract()[:n]
+    transformed = transform(raw)
+    return {"raw": raw, "transformed": transformed}

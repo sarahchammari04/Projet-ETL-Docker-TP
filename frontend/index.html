@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projet ETL</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 16px;
+      background: #f4f6f8;
+    }
+
+    h1 {
+      color: #222;
+    }
+
+    button {
+      padding: 10px 14px;
+      margin-right: 8px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background: white;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #eaeaea;
+    }
+
+    input {
+      padding: 8px;
+      width: 80px;
+    }
+
+    .row {
+      margin: 16px 0;
+    }
+
+    pre {
+      background: #111;
+      color: #00ff66;
+      padding: 14px;
+      border-radius: 8px;
+      overflow: auto;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Projet ETL (Frontend)</h1>
+  <p>Cette interface montre les étapes d’un ETL : Extract → Transform → Load.</p>
+
+  <div class="row">
+    <button id="preview">Preview ETL (3 lignes)</button>
+    <button id="run">Run ETL</button>
+    <button id="load">Load posts</button>
+    <button id="stats">Stats DB</button>
+
+    <label style="margin-left: 10px;">
+      Limit:
+      <input id="limit" type="number" min="1" max="100" value="10" />
+    </label>
+  </div>
+
+  <pre id="out">
+Clique sur "Preview ETL", puis "Run ETL", puis "Load posts".
+  </pre>
+
+  <script src="app.js"></script>
+</body>
+</html>

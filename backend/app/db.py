@@ -19,4 +19,11 @@ def init_db():
             loaded_at TEXT
         )
         """)
+        conn.execute("""
+        CREATE TABLE IF NOT EXISTS etl_runs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ran_at TEXT NOT NULL,
+            rows_loaded INTEGER NOT NULL
+        )
+        """)
         conn.commit()
