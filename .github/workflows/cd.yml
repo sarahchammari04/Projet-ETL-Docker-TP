@@ -6,7 +6,7 @@ on:
       - "v*.*.*"
 
 jobs:
-  build-push-deploy:
+  build-push:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -32,8 +32,8 @@ jobs:
           context: ./backend
           push: true
           tags: |
-            ghcr.io/sarahchammari04/etl-backend:${{ github.ref_name }}
-            ghcr.io/sarahchammari04/etl-backend:latest
+            ghcr.io/${{ github.repository_owner }}/etl-backend:${{ github.ref_name }}
+            ghcr.io/${{ github.repository_owner }}/etl-backend:latest
 
       - name: Build & push frontend
         uses: docker/build-push-action@v6
@@ -41,19 +41,5 @@ jobs:
           context: ./frontend
           push: true
           tags: |
-            ghcr.io/sarahchammari04/etl-frontend:${{ github.ref_name }}
-            ghcr.io/sarahchammari04/etl-frontend:latest
-
-      - name: Setup kubectl
-        uses: azure/setup-kubectl@v4
-        with:
-          version: "v1.29.0"
-
-      - name: Configure kubeconfig
-        run: |
-          mkdir -p ~/.kube
-          echo "${{ secrets.KUBE_CONFIG_B64 }}" | base64 -d > ~/.kube/config
-
-      - name: Deploy manifests
-        run: |
-          kubectl apply -f deploy/
+            ghcr.io/${{ github.repository_owner }}/etl-frontend:${{ github.ref_name }}
+            ghcr.io/${{ github.repository_owner }}/etl-frontend:latest
